@@ -1,16 +1,15 @@
 import json
 import os, os.path
 import requests
+from urllib3 import parse
 import cherrypy
 from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
-from redis import Redis
+import redis
 
 
-redis_url = os.getenv('REDISTOGO_URL')
-urlparse.uses_netloc.append('redis')
-url = urlparse.urlparse(redis_url)
-connection = Redis(host=url.hostname, port=url.port, db=0)
+url = parse(os.environ.get('REDISTOGO_URL', 'redis://localhost'))
+connection = redis.Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 
 env = Environment(
     loader=FileSystemLoader('templates')
