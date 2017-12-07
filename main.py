@@ -47,20 +47,16 @@ class NiftyStats(object):
 
     def data_read(self):
         """Read the Data"""
-        try:
-            data = connection.get('data')
-            time = connection.get('time')
+        data = connection.get('data')
+        time = connection.get('time')
 
-            if data and time:
-                data = json.loads(data.decode("utf-8"))
-                time = time.decode("utf-8")
-            else:
-                self.data_persist()
+        if data and time:
+            data = json.loads(data.decode("utf-8"))
+            time = time.decode("utf-8")
+        else:
+            self.data_persist()
 
-            return time,data
-
-        except Exception as err:
-            print ("Error in Reading data from Redis")
+        return time,data
 
     @cherrypy.expose
     def index(self):
