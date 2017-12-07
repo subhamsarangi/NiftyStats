@@ -67,10 +67,10 @@ class NiftyStats(object):
 if __name__ == '__main__':
     """Start CherryPy"""
 
+    webapp = NiftyStats()
     task = BackgroundTask(50, webapp.data_persist, bus=cherrypy.engine)
     task.start()
     
-    webapp = NiftyStats()
     conf = {
         'global': {
             'server.socket_host': '0.0.0.0',
