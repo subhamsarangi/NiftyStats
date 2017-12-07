@@ -6,8 +6,12 @@ from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
 from redis import from_url
 
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-connection = from_url(redis_url)
+CONFIG = dict(
+    REDIS_HOST=os.environ.get('REDIS_URL', '27.34.253.137'),
+    REDIS_PORT=os.environ.get('REDIS_PORT', 6379),
+    REDIS_DB=os.environ.get('REDIS_DB', 0),
+)
+connection = from_url(CONFIG['REDIS_HOST'])
 
 env = Environment(
     loader=FileSystemLoader('templates')
