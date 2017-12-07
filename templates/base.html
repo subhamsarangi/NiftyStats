@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %} || NiftyStats</title>
+        {% include 'css.html'%}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+      <header>
+        <h1>NiftyStats <p><a target="_blank" href="https://github.com/subhamsarangi/StockScraper">Github Repo</a></p> </h1>
+        <h3>Transforming the 'Nifty50' table into Cards</h3>
+      </header>
+        <div class="container">
+          {%block content%} {%endblock content%}
+        </div>
+        <br>
+        <footer>
+          <br>
+          Made by
+            <i class="glyphicon glyphicon-user"></i> Subham Sarangi</p>
+            <a target="_blank" href="https://github.com/subhamsarangi/StockScraper">Github Repo</a>
+        </footer>
+    </body>
+</html>

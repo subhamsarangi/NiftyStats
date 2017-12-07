@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} Welcome {{ super() }}{% endblock %}
+
+{%block content%}
+    <div class="row">
+      <h2 id="gainers">Top Gainers
+        <p> <small>[ <span class="glyphicon glyphicon-time"></span> {{ time  }} ]</small></p>
+      </h2>
+    {% for stocks in data  | batch('&nbsp;') %}
+      {% for stock in stocks %}
+        <div class="card col-6">
+          <h3><b>{{ stock.symbol }}</b></h3>
+          <h4 id="LTP">{{ stock.ltp }}</b></h4>
+          <h4>Open: <b>{{stock.openPrice}}</b></h4>
+          <h4 id="high">High: <b>{{stock.highPrice}}</b></h4>
+          <h4 id="low">Low: <b>{{stock.lowPrice}}</b></h4>
+          <h4>Volume: <b>{{stock.tradedQuantity}}</b></h4>
+          <h4>Previous Price: <b>{{stock.previousPrice}}</b></h4>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    </div>
+    <br>
+    <h2 class="updated">
+      <b>
+
+    </h2>
+{%endblock content%}
