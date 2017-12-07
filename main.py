@@ -56,7 +56,7 @@ class NiftyStats(object):
                 data = json.loads(data.decode("utf-8"))
                 time = time.decode("utf-8")
             else:
-                .data_persist()
+                data_persist()
             return time,data
 
         except Exception as err:
