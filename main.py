@@ -19,6 +19,7 @@ env = Environment(
 
 class NiftyStats(object):
     """Display the values stored in Redis"""
+
     def data_scrape():
         """Scrape the 'Nifty 50' table values"""
 
@@ -36,7 +37,7 @@ class NiftyStats(object):
 
     def data_persist():
         """Persist the data into a redis instance"""
-        time, data = data_scrape()
+        time, data = webapp.data_scrape()
         try:
             connection.set('data', data)
             connection.set('time', time)
@@ -55,7 +56,7 @@ class NiftyStats(object):
                 data = json.loads(data.decode("utf-8"))
                 time = time.decode("utf-8")
             else:
-                data_persist()
+                webapp.data_persist()
             return time,data
 
         except Exception as err:
@@ -63,7 +64,7 @@ class NiftyStats(object):
 
     @cherrypy.expose
     def index(self):
-        time, data = data_read()
+        time, data = webapp.data_read()
         stock_data = {'data': data,'time': time}
         home = env.get_template('index.html')
         return home.render(**stock_data)
