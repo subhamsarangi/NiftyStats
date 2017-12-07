@@ -1,5 +1,5 @@
 import requests
-from redis import StrictRedis, from_url
+from redis import StrictRedis
 import os
 import json
 
@@ -9,7 +9,6 @@ CONFIG = dict(
     REDIS_DB=os.environ.get('REDIS_DB', 0),
 )
 connection = StrictRedis(CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB'])
-# connection = from_url(CONFIG['REDIS_HOST'])
 
 def data_scrape():
     """Scrape the 'Nifty 50' table values"""

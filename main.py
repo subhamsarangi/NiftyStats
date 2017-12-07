@@ -2,7 +2,7 @@ import cherrypy
 from cherrypy.process.plugins import BackgroundTask
 import os, os.path
 from jinja2 import Environment, FileSystemLoader
-from scraper import *
+from scraper import data_read, data_persist
 
 env = Environment(
     loader=FileSystemLoader('templates')
