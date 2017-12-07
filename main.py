@@ -1,7 +1,7 @@
 import json
 import os, os.path
 import requests
-from urllib3 import parse
+from urllib import parse
 import cherrypy
 from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
