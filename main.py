@@ -20,7 +20,10 @@ env = Environment(
 class NiftyStats(object):
     """Display the values stored in Redis"""
 
-    def data_scrape():
+    def __init__(self):
+        self.nifty=NiftyStats()
+
+    def data_scrape(self):
         """Scrape the 'Nifty 50' table values"""
 
         URL = "https://www.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
@@ -35,9 +38,9 @@ class NiftyStats(object):
             print ("Error in getting data")
 
 
-    def data_persist():
+    def data_persist(self):
         """Persist the data into a redis instance"""
-        time, data = webapp.data_scrape()
+        time, data = nifty.data_scrape()
         try:
             connection.set('data', data)
             connection.set('time', time)
@@ -46,7 +49,7 @@ class NiftyStats(object):
         except Exception as err:
             print('Error Persisting to a redis instance: %s'% err)
 
-    def data_read():
+    def data_read(self):
         """Read the Data"""
         try:
             data = connection.get('data')
@@ -56,7 +59,7 @@ class NiftyStats(object):
                 data = json.loads(data.decode("utf-8"))
                 time = time.decode("utf-8")
             else:
-                webapp.data_persist()
+                nifty.data_persist()
             return time,data
 
         except Exception as err:
@@ -72,7 +75,6 @@ class NiftyStats(object):
 
 if __name__ == '__main__':
     """Start CherryPy"""
-
     webapp = NiftyStats()
     conf = {
         'global': {
