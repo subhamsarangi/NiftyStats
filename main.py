@@ -21,9 +21,9 @@ class NiftyStats(object):
     """Display the values stored in Redis"""
     URL = "https://www.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
     def __init__(self, *args, **kwargs):
-        self.data_read=data_read()
-        self.data_persist=data_persist()
-        self.data_scrape=data_scrape()
+        self.data_read=self.data_read()
+        self.data_persist=self.data_persist()
+        self.data_scrape=self.data_scrape()
 
     def data_scrape(self):
         """Scrape the 'Nifty 50' table values"""
