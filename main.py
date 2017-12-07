@@ -74,8 +74,9 @@ if __name__ == '__main__':
             'server.socket_port': int(os.environ.get('url.port', 5000)),
         },
         '/static': {
+            'tools.staticdir.root': os.path.dirname(os.path.abspath(__file__)),
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': abs_file_path('static'),
+            'tools.staticdir.dir': 'static',
         }
     }
 
