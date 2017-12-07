@@ -4,7 +4,7 @@ import requests
 import cherrypy
 from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
-from redis import StrictRedis
+from redis import from_url
 
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 connection = redis.from_url(redis_url)
