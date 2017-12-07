@@ -86,8 +86,8 @@ if __name__ == '__main__':
         }
     }
 
-    task = BackgroundTask(5*60, data_persist())
-    task.start()
+    # task = BackgroundTask(5*60, data_persist())
+    # task.start()
 
     cherrypy.quickstart(webapp, '/', conf)
 
