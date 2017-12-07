@@ -71,7 +71,7 @@ if __name__ == '__main__':
     conf = {
         'global': {
             'server.socket_host': '0.0.0.0',
-            'server.socket_port': int(os.environ.get('PORT', 5000)),
+            'server.socket_port': int(os.environ.get('url.port', 5000)),
         },
         #'/': {
         #    'tools.sessions.on': True,
