@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 import redis
 
 
-url = parse(os.environ.get('REDISTOGO_URL', 'redis://localhost'))
+url = parse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost'))
 connection = redis.Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 
 env = Environment(
