@@ -8,8 +8,8 @@ CONFIG = dict(
     REDIS_PORT=os.environ.get('REDIS_PORT', 6379),
     REDIS_DB=os.environ.get('REDIS_DB', 0),
 )
-# connection = StrictRedis(CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB'])
-connection = from_url(CONFIG['REDIS_HOST'])
+connection = StrictRedis(CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB'])
+# connection = from_url(CONFIG['REDIS_HOST'])
 
 def data_scrape():
     """Scrape the 'Nifty 50' table values"""
