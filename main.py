@@ -20,6 +20,8 @@ env = Environment(
 class NiftyStats(object):
     """Display the values stored in Redis"""
 
+    @cherrypy.expose
+    def index(self):
     def data_scrape(self):
         """Scrape the 'Nifty 50' table values"""
 
@@ -62,12 +64,10 @@ class NiftyStats(object):
         except Exception as err:
             print ("Error in Reading data from Redis")
 
-    @cherrypy.expose
-    def index(self):
-        time, data = data_read()
-        stock_data = {'data': data,'time': time}
-        home = env.get_template('index.html')
-        return home.render(**stock_data)
+    time, data = data_read()
+    stock_data = {'data': data,'time': time}
+    home = env.get_template('index.html')
+    return home.render(**stock_data)
 
 
 if __name__ == '__main__':
