@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 from redis import from_url
 
 CONFIG = dict(
-    REDIS_HOST=os.environ.get('REDIS_URL', 'localhost'),
+    REDIS_HOST=os.environ.get('REDIS_URL', '0.0.0.0'),
     REDIS_PORT=os.environ.get('REDIS_PORT', 6379),
     REDIS_DB=os.environ.get('REDIS_DB', 0),
 )
