@@ -10,12 +10,6 @@ env = Environment(
 
 class NiftyStats(object):
     """Display the values stored in Redis"""
-    def __init__(self):
-        self.background_task()
-
-    def background_task(self):
-        task = BackgroundTask(20, data_persist())
-        task.start()
 
     @cherrypy.expose
     def index(self):
@@ -43,7 +37,10 @@ if __name__ == '__main__':
             'tools.staticdir.dir': './static'
         }
     }
+
+    task = BackgroundTask(5*60, data_persist())
+    task.start()
+
     cherrypy.quickstart(webapp, '/', conf)
 
-    #cherrypy.engine.start()
-    #cherrypy.engine.block()
+    cherrypy.engine.start()
