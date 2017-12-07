@@ -65,7 +65,7 @@ class NiftyStats(object):
 
     @cherrypy.expose
     def index(self):
-        time, data = data_scrape()
+        time, data = data_read()
         stock_data = {'data': data,'time': time}
         home = env.get_template('index.html')
         return home.render(**stock_data)
@@ -90,8 +90,8 @@ if __name__ == '__main__':
         }
     }
 
-    # task = BackgroundTask(5*60, data_persist())
-    # task.start()
+     task = BackgroundTask(5*60, data_persist())
+     task.start()
 
     cherrypy.quickstart(webapp, '/', conf)
 
