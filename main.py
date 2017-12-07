@@ -9,7 +9,7 @@ import redis
 
 
 url = parse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost'))
-connection = redis.Redis(host=url.hostname, port=url.port, db=0, password=url.password)
+connection = redis.StrictRedis(host=url.hostname, port=url.port, db=0, password=url.password)
 
 env = Environment(
     loader=FileSystemLoader('templates')
