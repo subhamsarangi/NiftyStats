@@ -67,6 +67,9 @@ class NiftyStats(object):
 if __name__ == '__main__':
     """Start CherryPy"""
 
+    task = BackgroundTask(50, webapp.data_persist, bus=cherrypy.engine)
+    task.start()
+    
     webapp = NiftyStats()
     conf = {
         'global': {
@@ -79,9 +82,6 @@ if __name__ == '__main__':
             'tools.staticdir.dir': 'static',
         }
     }
-
-    task = BackgroundTask(50, webapp.data_persist, bus=cherrypy.engine)
-    task.start()
 
     cherrypy.quickstart(webapp, '/', conf)
     cherrypy.engine.start()
