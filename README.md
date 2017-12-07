@@ -1,4 +1,4 @@
-# StockScraper
+# NiftyStats
 
 ### Transforming the 'Nifty50' table into Cards
 
