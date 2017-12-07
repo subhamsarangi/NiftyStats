@@ -6,12 +6,8 @@ from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
 from redis import StrictRedis
 
-CONFIG = dict(
-    REDIS_HOST=os.environ.get('REDIS_URL', 'localhost'),
-    REDIS_PORT=os.environ.get('REDIS_PORT', 6379),
-    REDIS_DB=os.environ.get('REDIS_DB', 0),
-)
-connection = StrictRedis(CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB'])
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+connection = redis.from_url(redis_url)
 
 env = Environment(
     loader=FileSystemLoader('templates')
@@ -59,12 +55,13 @@ def data_read():
         print ("Error in Reading data from Redis")
 
 
+
 class NiftyStats(object):
     """Display the values stored in Redis"""
 
     @cherrypy.expose
     def index(self):
-        time,data = data_read()
+        time, data = data_read()
         stock_data = {'data': data,'time': time}
         home = env.get_template('index.html')
         return home.render(**stock_data)
@@ -79,10 +76,10 @@ if __name__ == '__main__':
             'server.socket_host': '0.0.0.0',
             'server.socket_port': int(os.environ.get('PORT', 5000)),
         },
-        '/': {
-            'tools.sessions.on': True,
-            'tools.staticdir.root': os.path.abspath(os.getcwd())
-        },
+        #'/': {
+        #    'tools.sessions.on': True,
+        #    'tools.staticdir.root': os.path.abspath(os.getcwd())
+        #},
         '/static': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './static'
