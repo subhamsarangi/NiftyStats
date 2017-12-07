@@ -46,7 +46,7 @@ def data_read():
             time = time.decode("utf-8")
         else:
             data_persist()
-        return data, time
+        return time,data
 
     except Exception as err:
         print ("Error in Reading data from Redis")

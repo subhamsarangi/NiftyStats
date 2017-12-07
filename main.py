@@ -13,7 +13,7 @@ class NiftyStats(object):
 
     @cherrypy.expose
     def index(self):
-        data,time = data_read()
+        time,data = data_read()
         stock_data = {'data': data,'time': time}
         home = env.get_template('index.html')
         return home.render(**stock_data)
