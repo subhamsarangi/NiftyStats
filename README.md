@@ -1,4 +1,4 @@
-# StockScraper
+# NiftyStats
 
 ### Transforming the 'Nifty50' table into Cards
 
@@ -10,4 +10,15 @@
 - requests==2.18.4
 
 
- ## Running Live at [https://niftystats.herokuapp.com/](https://niftystats.herokuapp.com/)
+## Running Live at [https://niftystats.herokuapp.com/](https://niftystats.herokuapp.com/)
+ 
+### Desktop View
+ ![](https://raw.githubusercontent.com/subhamsarangi/NiftyStats/master/screenshots/Screenshot%20(2826).png)
+ ![](https://raw.githubusercontent.com/subhamsarangi/NiftyStats/master/screenshots/Screenshot%20(2827).png)
+ 
+### Mobile View
+ ![](https://raw.githubusercontent.com/subhamsarangi/NiftyStats/master/screenshots/Screenshot%20(2828).png)
+ 
+### Tablet View
+![](https://raw.githubusercontent.com/subhamsarangi/NiftyStats/master/screenshots/Screenshot%20(2829).png)
+
