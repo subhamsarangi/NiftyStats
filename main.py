@@ -4,14 +4,13 @@ import requests
 import cherrypy
 from cherrypy.process.plugins import BackgroundTask
 from jinja2 import Environment, FileSystemLoader
-from redis import from_url
+from redis import Redis
 
-CONFIG = dict(
-    REDIS_HOST=os.environ.get('REDISTOGO_URL', 'localhost'),
-    REDIS_PORT=os.environ.get('REDIS_PORT', 6379),
-    REDIS_DB=os.environ.get('REDIS_DB', 0),
-)
-connection = from_url(CONFIG['REDIS_HOST'])
+
+redis_url = os.getenv('REDISTOGO_URL')
+urlparse.uses_netloc.append('redis')
+url = urlparse.urlparse(redis_url)
+connection = Redis(host=url.hostname, port=url.port, db=0)
 
 env = Environment(
     loader=FileSystemLoader('templates')
