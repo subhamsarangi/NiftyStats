@@ -22,7 +22,7 @@ class NiftyStats(object):
     def data_scrape(self):
         """Scrape the 'Nifty 50' table values"""
         try:
-            res = requests.get(self.URL)
+            res = requests.get(self.URL, timeout=0.1)
             res_json = res.json()
             time, data = res_json['time'], res_json['data']
             data = json.dumps(data)
