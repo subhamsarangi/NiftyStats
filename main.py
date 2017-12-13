@@ -36,8 +36,8 @@ class NiftyStats(object):
         """Persist the data into a redis instance"""
         time, data = self.data_scrape()
         try:
-            connection.setex('data', data, 300)
-            connection.setex('time', time, 300)
+            connection.setex('data', data)
+            connection.setex('time', time)
             print('Data Persisted Successfully at %s'% time)
 
         except Exception as err:
