@@ -36,8 +36,8 @@ class NiftyStats(object):
         """Persist the data into a redis instance"""
         time, data = self.data_scrape()
         try:
-            connection.setex('data', data)
-            connection.setex('time', time)
+            connection.setex('data', data, 300)
+            connection.setex('time', time, 300)
             print('Data Persisted Successfully at %s'% time)
 
         except Exception as err:
@@ -69,9 +69,6 @@ if __name__ == '__main__':
 
     webapp = NiftyStats()
     
-    Monitor(cherrypy.engine, webapp.data_persist, frequency=300).subscribe()
-
-
     conf = {
         'global': {
             'server.socket_host': '0.0.0.0',
@@ -80,4 +77,7 @@ if __name__ == '__main__':
     }
 
     cherrypy.quickstart(webapp, '/', conf)
+
+    Monitor(cherrypy.engine, webapp.data_persist, frequency=300).subscribe()
+
     cherrypy.engine.start()
