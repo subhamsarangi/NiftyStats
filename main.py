@@ -3,7 +3,7 @@ import os, os.path
 import requests
 from urllib import parse
 import cherrypy
-from cherrypy.process.plugins import BackgroundTask
+from cherrypy.process.plugins import Monitor
 from jinja2 import Environment, FileSystemLoader
 import redis
 
@@ -36,8 +36,8 @@ class NiftyStats(object):
         """Persist the data into a redis instance"""
         time, data = self.data_scrape()
         try:
-            connection.set('data', data)
-            connection.set('time', time)
+            connection.setex('data', data, 300)
+            connection.setex('time', time, 300)
             print('Data Persisted Successfully at %s'% time)
 
         except Exception as err:
@@ -68,8 +68,9 @@ if __name__ == '__main__':
     """Start CherryPy"""
 
     webapp = NiftyStats()
-    task = BackgroundTask(20, webapp.data_persist, bus=cherrypy.engine)
-    task.start()
+    
+    Monitor(webapp.data_persist, frequency=300, bus=cherrypy.engine).subscribe()
+
 
     conf = {
         'global': {
