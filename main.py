@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     webapp = NiftyStats()
     
-    Monitor(webapp.data_persist, frequency=300, bus=cherrypy.engine).subscribe()
+    Monitor(cherrypy.engine, webapp.data_persist, frequency=300).subscribe()
 
 
     conf = {
